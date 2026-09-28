@@ -1,0 +1,13 @@
+# One service, one published port — the one lab.conf's HEALTH names — and its state under
+# /srv/appdata/<name>. The platform adds its own file beside this one at every deploy (no
+# capabilities, no new privileges, a walled network) and refuses anything its policy does not
+# know: privileged, cap_add, devices, host networking, binds outside /srv/appdata/<name>,
+# secrets and configs read from the host. Rename myapp to your application's name throughout.
+services:
+  app:
+    build: .
+    ports: ["8801:8000"]                      # 8801: the port the platform's owner gave you
+    volumes: ["/srv/appdata/lab-rehearsal/data:/data"]
+    read_only: true
+    tmpfs: [/tmp]
+    restart: unless-stopped
