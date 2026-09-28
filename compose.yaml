@@ -6,8 +6,8 @@
 services:
   app:
     build: .
-    ports: ["8801:8000"]                      # 8801: the port the platform's owner gave you
-    volumes: ["/srv/appdata/lab-rehearsal/data:/data"]
+    ports: ["8899:8000"]
+    volumes: ["${APPDATA}/data:/data"]
     read_only: true
     tmpfs: [/tmp]
     restart: unless-stopped
